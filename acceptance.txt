@@ -1,0 +1,1 @@
+Synthetic governance acceptance fixture. No production data or private source.
