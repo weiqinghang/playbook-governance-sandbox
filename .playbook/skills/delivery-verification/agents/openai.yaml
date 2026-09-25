@@ -1,0 +1,4 @@
+interface:
+  display_name: "Delivery Verification"
+  short_description: "Map acceptance items to fresh, locatable delivery evidence"
+  default_prompt: "Use $delivery-verification to map each acceptance item to fresh delivery evidence."

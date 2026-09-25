@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "host_boundary": "This catalog is project-provided discovery metadata. The Codex host controls the final Available skills list and may trim it for context.",
+  "capabilities": [
+    {
+      "name": "goal-crafter",
+      "pack": "goal-crafter",
+      "selection": "explicit opt-in required",
+      "entrypoint": "$goal-crafter",
+      "description": "Create, tighten, or review compact Codex /goal task contracts.",
+      "projection": ".agents/skills/goal-crafter/SKILL.md",
+      "upgrade": "Selected installations update only from a lock-proven baseline. Local changes or unmanaged paths fail closed until a human chooses overwrite or retain-local."
+    }
+  ]
+}
