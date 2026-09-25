@@ -19,10 +19,10 @@ architect 或 reviewer；结果必须被消费。
 
 ## Reviewer
 
-MR 合并前必须有独立 reviewer 对 exact MR HEAD 的 `review pass`。Reviewer 不实现、
+MR/PR 合并前必须有独立 reviewer 对 exact HEAD 的 `review pass`。Reviewer 不实现、
 不 merge/tag/release、不改标签；其共享证据是带 `Agent: reviewer`、`Instance:`、
-`Via: Codex` 的 GitLab MR comment。若 reviewer 无法独立完成，merge blocked。
-在已安装 `gitlab-governance-core` 的项目派发 GitLab 正式 Reviewer 时，把
+`Via: Codex` 的原生平台 MR/PR comment。若 reviewer 无法独立完成，merge blocked。
+在已安装 `gitlab-governance-core` 的项目派发正式 Reviewer 时，把
 `.playbook/docs/project/reviewer-checklists.md` 和
 `.playbook/docs/project/reviewer-question-contracts.md` 作为必读默认方法；Reviewer 对每条 finding
 分开判断原主张、真实缺陷、组件责任、影响与严重度，不能因缺少可选 `expert-reviewer` pack 跳过。
@@ -42,3 +42,9 @@ retry，更不得写 `review blocked`。只有 launch failed、incomplete 或明
 dispatch、普通 file/comment/commit/push 不是 release authorization。protected merge、
 annotated tag/Release、permission/security/credential、data/schema migration、cross-repo
 write 各自使用 fresh action guard。旧 delivery context 或 ActionAuthorizer 不能继续授权。
+
+## GitHub 兼容
+
+GitHub 目标使用 PR 承载上述 MR 职责，独立 reviewer 在 PR comment 留下相同署名及 exact HEAD。
+labels 为状态权威；平台差异入口见 `.playbook/docs/project/github-governance.md`，不能在 GitHub
+项目调用 GitLab MR API。首次持久化写入准入与高风险授权不因平台变化而省略。

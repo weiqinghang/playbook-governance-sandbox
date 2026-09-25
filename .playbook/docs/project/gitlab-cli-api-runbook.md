@@ -27,3 +27,9 @@ single-owner 的普通维护不要求第二个 GitLab 人类账号：独立 revi
 与 controller 的明确 merge 授权即可。只有 action-specific policy 明确要求时（例如安全、权限、生产
 破坏性操作或数据/schema migration），才在 preflight 增加 `--require-distinct-native-approval`，要求
 不同于 MR 作者的 GitLab 原生 approval；它不是所有 protected merge 的默认门槛。
+
+## Backbone 退役
+
+仅初始化 Discovery / Delivery；不再要求 Parent backbone 或创建 backbone::*。历史 Issue、标签、关联保留。
+远端退役须项目绑定 Board ID、标准配置匹配、持久备份及删除后回读；归属不明或自定义则报告保留。
+本地 seed 升级不等于远端 Board 已卸载。

@@ -1,26 +1,26 @@
 {
   "seed_version": "1.5.1",
-  "distribution_status": "stable",
-  "generated_at": "2026-09-25T05:31:37.760776+00:00",
+  "distribution_status": "release-ready",
+  "generated_at": "2026-09-25T05:42:15.307030+00:00",
   "source_repo": "ai-native/bigital-agent-playbook",
-  "source_commit": "60e2d18c30e40b340c519fff81698af9ed366d2c",
+  "source_commit": "4baaa733ec21baa66f85b32d5fe0962033a276b3",
   "source_state": "clean",
   "seed_release_notes": "seed/releases/v1.5.1.md",
   "seed_changelog": "CHANGELOG.md",
-  "mode": "bootstrap",
+  "mode": "upgrade",
   "packs": [
     "agent-orchestration-core",
     "gitlab-governance-core"
   ],
   "pack_manifest_sha256": {
     "agent-orchestration-core": "dbf21791da06956c205d37e0198841c159d68fbff7d34ef9cf4ac668195eee85",
-    "gitlab-governance-core": "0de59abcb74891eb388a547a76db670b12d4f06450a37e9412f2a7dadbf02dd0"
+    "gitlab-governance-core": "d50ad0bcb2608bdfc7817b3bb5c9aa4534fddaf714924e04d894f76c280fee9f"
   },
   "summary": {
-    "copy": 41,
+    "copy": 0,
     "migrate": 0,
-    "noop": 0,
-    "preserve": 0,
+    "noop": 40,
+    "preserve": 3,
     "conflict": 0,
     "migration_required": 0,
     "retain_local": 0,
@@ -29,7 +29,7 @@
       {
         "target_name": ".playbook/docs/project/subagent-model-routing.json",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "1c00cd14498b8861a0bbceefb6f89a464fbe3a8cf338d887da44132020df367f",
         "target_sha256": "1c00cd14498b8861a0bbceefb6f89a464fbe3a8cf338d887da44132020df367f",
         "executable": false
@@ -37,15 +37,15 @@
       {
         "target_name": "AGENTS.md",
         "strategy": "managed_block",
-        "action": "copy",
-        "source_sha256": "6a2f66061fccb4e2ded08970c1572d58b683f74f172526b975c6ad235055028d",
-        "target_sha256": "6a2f66061fccb4e2ded08970c1572d58b683f74f172526b975c6ad235055028d",
+        "action": "noop",
+        "source_sha256": "d8c84d128e146b52bcdda264cea769ca778b9eff8797f96f2cb515bd7bdffa4e",
+        "target_sha256": "d8c84d128e146b52bcdda264cea769ca778b9eff8797f96f2cb515bd7bdffa4e",
         "executable": false
       },
       {
         "target_name": "docs/README.md",
         "strategy": "copy_if_absent",
-        "action": "copy",
+        "action": "preserve",
         "source_sha256": "e3329ee0dd51e0878d6f22008c128888f5853fe1665929022a9d59d0262a825f",
         "target_sha256": "e3329ee0dd51e0878d6f22008c128888f5853fe1665929022a9d59d0262a825f",
         "executable": false
@@ -53,47 +53,47 @@
       {
         "target_name": ".playbook/docs/project/agent-context-protocol.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "bcff090cd37ca755f072685b1f2c8a9ac896aacda43075a2fcb3420a8788e259",
-        "target_sha256": "bcff090cd37ca755f072685b1f2c8a9ac896aacda43075a2fcb3420a8788e259",
+        "action": "noop",
+        "source_sha256": "b0e53291cb45cd7526b39b6cbd9d1cd76c45de05f885040d20c9763111f1a0ba",
+        "target_sha256": "b0e53291cb45cd7526b39b6cbd9d1cd76c45de05f885040d20c9763111f1a0ba",
         "executable": false
       },
       {
         "target_name": ".playbook/docs/project/document-governance.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "85c2ffc4bbb63fad345dd9d6c4ba23f32df03620797cbeab84a5f39c1f17d59d",
-        "target_sha256": "85c2ffc4bbb63fad345dd9d6c4ba23f32df03620797cbeab84a5f39c1f17d59d",
+        "action": "noop",
+        "source_sha256": "e96e48a16125a904bce15d67f0a7da09a5fc6acd0975b6f04c56515650df9c74",
+        "target_sha256": "e96e48a16125a904bce15d67f0a7da09a5fc6acd0975b6f04c56515650df9c74",
         "executable": false
       },
       {
         "target_name": ".playbook/docs/project/agent-registry.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "a891dd027b2cd14a73892e54fdd77fca61af2f58820b73eb829dcf32d2445d77",
-        "target_sha256": "a891dd027b2cd14a73892e54fdd77fca61af2f58820b73eb829dcf32d2445d77",
+        "action": "noop",
+        "source_sha256": "b5302c273c29b14ad01cf1d2ebaba32ff038810f37894cc227ba9fe5cac3cd85",
+        "target_sha256": "b5302c273c29b14ad01cf1d2ebaba32ff038810f37894cc227ba9fe5cac3cd85",
         "executable": false
       },
       {
         "target_name": ".playbook/docs/project/agent-orchestration.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "7e154e026f5d7c195b1329705879a3f7acd5265425921c34abb2a1be6ccfbd70",
-        "target_sha256": "7e154e026f5d7c195b1329705879a3f7acd5265425921c34abb2a1be6ccfbd70",
+        "action": "noop",
+        "source_sha256": "e556b45a36cee5e84527d8d2b38f1b00dc5fbf0199d8244f3fe982a6d2e5a765",
+        "target_sha256": "e556b45a36cee5e84527d8d2b38f1b00dc5fbf0199d8244f3fe982a6d2e5a765",
         "executable": false
       },
       {
         "target_name": ".playbook/docs/project/charter.md",
         "strategy": "copy_if_absent",
-        "action": "copy",
-        "source_sha256": "6229db3f4e2425f6cc841b1be160fb2d9e6c7b6715f59d8ac859357637a1f972",
-        "target_sha256": "6229db3f4e2425f6cc841b1be160fb2d9e6c7b6715f59d8ac859357637a1f972",
+        "action": "preserve",
+        "source_sha256": "f6ea00206801582843a2605262e0eba5c62d5f739cd1bef7c8f932d7c123d855",
+        "target_sha256": "f6ea00206801582843a2605262e0eba5c62d5f739cd1bef7c8f932d7c123d855",
         "executable": false
       },
       {
         "target_name": ".playbook/capabilities/skills.json",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "67898b3b0d936d08a9adce488f4611e2e04f964290229ee3574cfb57ef39f8e9",
         "target_sha256": "67898b3b0d936d08a9adce488f4611e2e04f964290229ee3574cfb57ef39f8e9",
         "executable": false
@@ -101,7 +101,7 @@
       {
         "target_name": ".playbook/config/collaboration-language-v1.json",
         "strategy": "copy_if_absent",
-        "action": "copy",
+        "action": "preserve",
         "source_sha256": "117b61e8d6ebde0ade31b10b84ff2aec51195ad665453cdb1fd2b249bd4f6f50",
         "target_sha256": "117b61e8d6ebde0ade31b10b84ff2aec51195ad665453cdb1fd2b249bd4f6f50",
         "executable": false
@@ -109,7 +109,7 @@
       {
         "target_name": ".playbook/scripts/collaboration_language.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "5473ce809f4f19040390b4b4cdcd003758ed6a3cfc2201a517cfcd86d66a4174",
         "target_sha256": "5473ce809f4f19040390b4b4cdcd003758ed6a3cfc2201a517cfcd86d66a4174",
         "executable": false
@@ -117,7 +117,7 @@
       {
         "target_name": ".playbook/scripts/audit_seed_installation.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "b7c5deec479eb9b85e593f3472f67c251fc7f21ef69117cf8f335bc092b77d50",
         "target_sha256": "b7c5deec479eb9b85e593f3472f67c251fc7f21ef69117cf8f335bc092b77d50",
         "executable": false
@@ -125,7 +125,7 @@
       {
         "target_name": ".playbook/scripts/reviewer_wait_policy.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "e45256a2900eb99b49efe796a8a75ad868176c5978066f75cc69b25b9899de20",
         "target_sha256": "e45256a2900eb99b49efe796a8a75ad868176c5978066f75cc69b25b9899de20",
         "executable": false
@@ -133,7 +133,7 @@
       {
         "target_name": ".playbook/scripts/role_model_routing.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "6fdca081d0163ccc6f946e698158d1363ae2b9814303186dbe32c16e85a137bb",
         "target_sha256": "6fdca081d0163ccc6f946e698158d1363ae2b9814303186dbe32c16e85a137bb",
         "executable": false
@@ -141,7 +141,7 @@
       {
         "target_name": ".playbook/scripts/gitlab_markdown.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "2d583d6048500014fd5832046635ec9aaba2978c2a2ea7b63a9a1af7c27e7d85",
         "target_sha256": "2d583d6048500014fd5832046635ec9aaba2978c2a2ea7b63a9a1af7c27e7d85",
         "executable": false
@@ -149,15 +149,15 @@
       {
         "target_name": ".playbook/docs/project/product-development-xp-contract.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "c7c66872d1a9acb87398f7b2602527548042cd787090b8cc9a462840bdfea6e5",
-        "target_sha256": "c7c66872d1a9acb87398f7b2602527548042cd787090b8cc9a462840bdfea6e5",
+        "action": "noop",
+        "source_sha256": "29bc84cabbdbfcc5efd4e4c7cde528ba2075ba9f97fe1c920551b284c3c74de0",
+        "target_sha256": "29bc84cabbdbfcc5efd4e4c7cde528ba2075ba9f97fe1c920551b284c3c74de0",
         "executable": false
       },
       {
         "target_name": ".playbook/skills/btdd/SKILL.md",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
         "target_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
         "executable": false
@@ -165,7 +165,7 @@
       {
         "target_name": ".playbook/skills/btdd/agents/openai.yaml",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
         "target_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
         "executable": false
@@ -173,7 +173,7 @@
       {
         "target_name": ".agents/skills/btdd/SKILL.md",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
         "target_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
         "executable": false
@@ -181,7 +181,7 @@
       {
         "target_name": ".agents/skills/btdd/agents/openai.yaml",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
         "target_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
         "executable": false
@@ -189,15 +189,15 @@
       {
         "target_name": ".playbook/skills/delivery-verification/SKILL.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
-        "target_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
+        "action": "noop",
+        "source_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
+        "target_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
         "executable": false
       },
       {
         "target_name": ".playbook/skills/delivery-verification/agents/openai.yaml",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
         "target_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
         "executable": false
@@ -205,7 +205,7 @@
       {
         "target_name": ".playbook/skills/delivery-verification/scripts/evidence_contract.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
         "target_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
         "executable": false
@@ -213,15 +213,15 @@
       {
         "target_name": ".agents/skills/delivery-verification/SKILL.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
-        "target_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
+        "action": "noop",
+        "source_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
+        "target_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
         "executable": false
       },
       {
         "target_name": ".agents/skills/delivery-verification/agents/openai.yaml",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
         "target_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
         "executable": false
@@ -229,7 +229,7 @@
       {
         "target_name": ".agents/skills/delivery-verification/scripts/evidence_contract.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
         "target_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
         "executable": false
@@ -237,7 +237,7 @@
       {
         "target_name": ".playbook/scripts/host_adoption.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "9ea795d4a99f8ab6670818f2faebd676f309a65d5c87dff253482405ce2aed80",
         "target_sha256": "9ea795d4a99f8ab6670818f2faebd676f309a65d5c87dff253482405ce2aed80",
         "executable": false
@@ -245,7 +245,7 @@
       {
         "target_name": ".playbook/docs/project/host-skill-adoption.md",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "dbdaafdfa3b3ca0b373626f2a2bc0229f4568bd601ab221196421f2cb3085ff7",
         "target_sha256": "dbdaafdfa3b3ca0b373626f2a2bc0229f4568bd601ab221196421f2cb3085ff7",
         "executable": false
@@ -253,7 +253,7 @@
       {
         "target_name": ".playbook/skills/btdd/references/role-relay.md",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
         "target_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
         "executable": false
@@ -261,7 +261,7 @@
       {
         "target_name": ".agents/skills/btdd/references/role-relay.md",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
         "target_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
         "executable": false
@@ -269,15 +269,15 @@
       {
         "target_name": ".playbook/docs/project/gitlab-cli-api-runbook.md",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "c403821d1ac76e70fb4220bc56107e6c858278b5780a6182c6c2b60fc6ea7be8",
-        "target_sha256": "c403821d1ac76e70fb4220bc56107e6c858278b5780a6182c6c2b60fc6ea7be8",
+        "action": "noop",
+        "source_sha256": "0143e74e96c352123b74cbc265ff8271267f7bc2d2cb0a86b533aa47fa4faeb5",
+        "target_sha256": "0143e74e96c352123b74cbc265ff8271267f7bc2d2cb0a86b533aa47fa4faeb5",
         "executable": false
       },
       {
         "target_name": ".playbook/docs/project/reviewer-checklists.md",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "8aaee2e51b50deaa699d32df6c155ba30146486356955b9066b8308ce9618b59",
         "target_sha256": "8aaee2e51b50deaa699d32df6c155ba30146486356955b9066b8308ce9618b59",
         "executable": false
@@ -285,7 +285,7 @@
       {
         "target_name": ".playbook/docs/project/reviewer-question-contracts.md",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "152f7f8539b5856cd607e79558fd71d3f72e50a2451c7e65432f8979f3378396",
         "target_sha256": "152f7f8539b5856cd607e79558fd71d3f72e50a2451c7e65432f8979f3378396",
         "executable": false
@@ -293,7 +293,7 @@
       {
         "target_name": ".playbook/scripts/delivery_context.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "8e5c5e06b38bea2e2a3c71ac2a5cc74eed7bcc1f3473de3007da0b8df58b5fac",
         "target_sha256": "8e5c5e06b38bea2e2a3c71ac2a5cc74eed7bcc1f3473de3007da0b8df58b5fac",
         "executable": false
@@ -301,7 +301,7 @@
       {
         "target_name": ".playbook/scripts/lean_core.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "7f8458e4c284f077643f9ff48a47208f7aa94c219e391ff693c2d89dfb30f3e4",
         "target_sha256": "7f8458e4c284f077643f9ff48a47208f7aa94c219e391ff693c2d89dfb30f3e4",
         "executable": false
@@ -309,15 +309,15 @@
       {
         "target_name": ".playbook/scripts/git_workflow_guard.py",
         "strategy": "copy",
-        "action": "copy",
-        "source_sha256": "18aa029d7cf2776ae55a57bdcfbeb026f667ba27f30bcccbea27f437d05b28e8",
-        "target_sha256": "18aa029d7cf2776ae55a57bdcfbeb026f667ba27f30bcccbea27f437d05b28e8",
+        "action": "noop",
+        "source_sha256": "c709ff98705dea907dfc6c24e92f8fd8ead4ce802538400a50ba3704f9411e7f",
+        "target_sha256": "c709ff98705dea907dfc6c24e92f8fd8ead4ce802538400a50ba3704f9411e7f",
         "executable": false
       },
       {
         "target_name": ".playbook/scripts/git_traceability.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "70a1cb800dd49e18a34ae3ba4b7b607e9c0623eaf7bd5482df2c83dd9f049951",
         "target_sha256": "70a1cb800dd49e18a34ae3ba4b7b607e9c0623eaf7bd5482df2c83dd9f049951",
         "executable": false
@@ -325,7 +325,7 @@
       {
         "target_name": "scripts/delivery_context.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
         "target_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
         "executable": true
@@ -333,7 +333,7 @@
       {
         "target_name": "scripts/lean_core.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "312b78c8f7cbcde604fc4058faaa0cce58b39dd8f39eca30c71e0d9b785c04b4",
         "target_sha256": "312b78c8f7cbcde604fc4058faaa0cce58b39dd8f39eca30c71e0d9b785c04b4",
         "executable": false
@@ -341,7 +341,7 @@
       {
         "target_name": "scripts/git_workflow_guard.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
         "target_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
         "executable": true
@@ -349,10 +349,26 @@
       {
         "target_name": "scripts/git_traceability.py",
         "strategy": "copy",
-        "action": "copy",
+        "action": "noop",
         "source_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
         "target_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
         "executable": true
+      },
+      {
+        "target_name": ".playbook/scripts/github_governance.py",
+        "strategy": "copy",
+        "action": "noop",
+        "source_sha256": "90e757dd317bbced68d867f98da15f68e5a3e4cc9e65c39308c488787a4bdbf6",
+        "target_sha256": "90e757dd317bbced68d867f98da15f68e5a3e4cc9e65c39308c488787a4bdbf6",
+        "executable": false
+      },
+      {
+        "target_name": ".playbook/docs/project/github-governance.md",
+        "strategy": "copy",
+        "action": "noop",
+        "source_sha256": "52c2397602c7a74e83271505ee100334c60a6eff8973045fd22cf5f37d0650e9",
+        "target_sha256": "52c2397602c7a74e83271505ee100334c60a6eff8973045fd22cf5f37d0650e9",
+        "executable": false
       }
     ],
     "manual_retirement_files": [],
@@ -363,7 +379,7 @@
     {
       "target_name": ".playbook/docs/project/subagent-model-routing.json",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "1c00cd14498b8861a0bbceefb6f89a464fbe3a8cf338d887da44132020df367f",
       "target_sha256": "1c00cd14498b8861a0bbceefb6f89a464fbe3a8cf338d887da44132020df367f",
       "executable": false
@@ -371,15 +387,15 @@
     {
       "target_name": "AGENTS.md",
       "strategy": "managed_block",
-      "action": "copy",
-      "source_sha256": "6a2f66061fccb4e2ded08970c1572d58b683f74f172526b975c6ad235055028d",
-      "target_sha256": "6a2f66061fccb4e2ded08970c1572d58b683f74f172526b975c6ad235055028d",
+      "action": "noop",
+      "source_sha256": "d8c84d128e146b52bcdda264cea769ca778b9eff8797f96f2cb515bd7bdffa4e",
+      "target_sha256": "d8c84d128e146b52bcdda264cea769ca778b9eff8797f96f2cb515bd7bdffa4e",
       "executable": false
     },
     {
       "target_name": "docs/README.md",
       "strategy": "copy_if_absent",
-      "action": "copy",
+      "action": "preserve",
       "source_sha256": "e3329ee0dd51e0878d6f22008c128888f5853fe1665929022a9d59d0262a825f",
       "target_sha256": "e3329ee0dd51e0878d6f22008c128888f5853fe1665929022a9d59d0262a825f",
       "executable": false
@@ -387,47 +403,47 @@
     {
       "target_name": ".playbook/docs/project/agent-context-protocol.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "bcff090cd37ca755f072685b1f2c8a9ac896aacda43075a2fcb3420a8788e259",
-      "target_sha256": "bcff090cd37ca755f072685b1f2c8a9ac896aacda43075a2fcb3420a8788e259",
+      "action": "noop",
+      "source_sha256": "b0e53291cb45cd7526b39b6cbd9d1cd76c45de05f885040d20c9763111f1a0ba",
+      "target_sha256": "b0e53291cb45cd7526b39b6cbd9d1cd76c45de05f885040d20c9763111f1a0ba",
       "executable": false
     },
     {
       "target_name": ".playbook/docs/project/document-governance.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "85c2ffc4bbb63fad345dd9d6c4ba23f32df03620797cbeab84a5f39c1f17d59d",
-      "target_sha256": "85c2ffc4bbb63fad345dd9d6c4ba23f32df03620797cbeab84a5f39c1f17d59d",
+      "action": "noop",
+      "source_sha256": "e96e48a16125a904bce15d67f0a7da09a5fc6acd0975b6f04c56515650df9c74",
+      "target_sha256": "e96e48a16125a904bce15d67f0a7da09a5fc6acd0975b6f04c56515650df9c74",
       "executable": false
     },
     {
       "target_name": ".playbook/docs/project/agent-registry.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "a891dd027b2cd14a73892e54fdd77fca61af2f58820b73eb829dcf32d2445d77",
-      "target_sha256": "a891dd027b2cd14a73892e54fdd77fca61af2f58820b73eb829dcf32d2445d77",
+      "action": "noop",
+      "source_sha256": "b5302c273c29b14ad01cf1d2ebaba32ff038810f37894cc227ba9fe5cac3cd85",
+      "target_sha256": "b5302c273c29b14ad01cf1d2ebaba32ff038810f37894cc227ba9fe5cac3cd85",
       "executable": false
     },
     {
       "target_name": ".playbook/docs/project/agent-orchestration.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "7e154e026f5d7c195b1329705879a3f7acd5265425921c34abb2a1be6ccfbd70",
-      "target_sha256": "7e154e026f5d7c195b1329705879a3f7acd5265425921c34abb2a1be6ccfbd70",
+      "action": "noop",
+      "source_sha256": "e556b45a36cee5e84527d8d2b38f1b00dc5fbf0199d8244f3fe982a6d2e5a765",
+      "target_sha256": "e556b45a36cee5e84527d8d2b38f1b00dc5fbf0199d8244f3fe982a6d2e5a765",
       "executable": false
     },
     {
       "target_name": ".playbook/docs/project/charter.md",
       "strategy": "copy_if_absent",
-      "action": "copy",
-      "source_sha256": "6229db3f4e2425f6cc841b1be160fb2d9e6c7b6715f59d8ac859357637a1f972",
-      "target_sha256": "6229db3f4e2425f6cc841b1be160fb2d9e6c7b6715f59d8ac859357637a1f972",
+      "action": "preserve",
+      "source_sha256": "f6ea00206801582843a2605262e0eba5c62d5f739cd1bef7c8f932d7c123d855",
+      "target_sha256": "f6ea00206801582843a2605262e0eba5c62d5f739cd1bef7c8f932d7c123d855",
       "executable": false
     },
     {
       "target_name": ".playbook/capabilities/skills.json",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "67898b3b0d936d08a9adce488f4611e2e04f964290229ee3574cfb57ef39f8e9",
       "target_sha256": "67898b3b0d936d08a9adce488f4611e2e04f964290229ee3574cfb57ef39f8e9",
       "executable": false
@@ -435,7 +451,7 @@
     {
       "target_name": ".playbook/config/collaboration-language-v1.json",
       "strategy": "copy_if_absent",
-      "action": "copy",
+      "action": "preserve",
       "source_sha256": "117b61e8d6ebde0ade31b10b84ff2aec51195ad665453cdb1fd2b249bd4f6f50",
       "target_sha256": "117b61e8d6ebde0ade31b10b84ff2aec51195ad665453cdb1fd2b249bd4f6f50",
       "executable": false
@@ -443,7 +459,7 @@
     {
       "target_name": ".playbook/scripts/collaboration_language.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "5473ce809f4f19040390b4b4cdcd003758ed6a3cfc2201a517cfcd86d66a4174",
       "target_sha256": "5473ce809f4f19040390b4b4cdcd003758ed6a3cfc2201a517cfcd86d66a4174",
       "executable": false
@@ -451,7 +467,7 @@
     {
       "target_name": ".playbook/scripts/audit_seed_installation.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "b7c5deec479eb9b85e593f3472f67c251fc7f21ef69117cf8f335bc092b77d50",
       "target_sha256": "b7c5deec479eb9b85e593f3472f67c251fc7f21ef69117cf8f335bc092b77d50",
       "executable": false
@@ -459,7 +475,7 @@
     {
       "target_name": ".playbook/scripts/reviewer_wait_policy.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "e45256a2900eb99b49efe796a8a75ad868176c5978066f75cc69b25b9899de20",
       "target_sha256": "e45256a2900eb99b49efe796a8a75ad868176c5978066f75cc69b25b9899de20",
       "executable": false
@@ -467,7 +483,7 @@
     {
       "target_name": ".playbook/scripts/role_model_routing.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "6fdca081d0163ccc6f946e698158d1363ae2b9814303186dbe32c16e85a137bb",
       "target_sha256": "6fdca081d0163ccc6f946e698158d1363ae2b9814303186dbe32c16e85a137bb",
       "executable": false
@@ -475,7 +491,7 @@
     {
       "target_name": ".playbook/scripts/gitlab_markdown.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "2d583d6048500014fd5832046635ec9aaba2978c2a2ea7b63a9a1af7c27e7d85",
       "target_sha256": "2d583d6048500014fd5832046635ec9aaba2978c2a2ea7b63a9a1af7c27e7d85",
       "executable": false
@@ -483,15 +499,15 @@
     {
       "target_name": ".playbook/docs/project/product-development-xp-contract.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "c7c66872d1a9acb87398f7b2602527548042cd787090b8cc9a462840bdfea6e5",
-      "target_sha256": "c7c66872d1a9acb87398f7b2602527548042cd787090b8cc9a462840bdfea6e5",
+      "action": "noop",
+      "source_sha256": "29bc84cabbdbfcc5efd4e4c7cde528ba2075ba9f97fe1c920551b284c3c74de0",
+      "target_sha256": "29bc84cabbdbfcc5efd4e4c7cde528ba2075ba9f97fe1c920551b284c3c74de0",
       "executable": false
     },
     {
       "target_name": ".playbook/skills/btdd/SKILL.md",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
       "target_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
       "executable": false
@@ -499,7 +515,7 @@
     {
       "target_name": ".playbook/skills/btdd/agents/openai.yaml",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
       "target_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
       "executable": false
@@ -507,7 +523,7 @@
     {
       "target_name": ".agents/skills/btdd/SKILL.md",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
       "target_sha256": "083a0ce9d8613b908ce2fc6a2a6e60e24964102d4390c2944cc0dc4c649409ff",
       "executable": false
@@ -515,7 +531,7 @@
     {
       "target_name": ".agents/skills/btdd/agents/openai.yaml",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
       "target_sha256": "6f36d83853a84b3d0a5db3cb426bc3f414f40f19f1e8713617730348194529c8",
       "executable": false
@@ -523,15 +539,15 @@
     {
       "target_name": ".playbook/skills/delivery-verification/SKILL.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
-      "target_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
+      "action": "noop",
+      "source_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
+      "target_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
       "executable": false
     },
     {
       "target_name": ".playbook/skills/delivery-verification/agents/openai.yaml",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
       "target_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
       "executable": false
@@ -539,7 +555,7 @@
     {
       "target_name": ".playbook/skills/delivery-verification/scripts/evidence_contract.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
       "target_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
       "executable": false
@@ -547,15 +563,15 @@
     {
       "target_name": ".agents/skills/delivery-verification/SKILL.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
-      "target_sha256": "0b6dca3d49f6b7484958c0c35f239cb78488ffa287d4bed3fa072690ecba5984",
+      "action": "noop",
+      "source_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
+      "target_sha256": "6c1926fdae58ea67be74887a701b5c0b2ccaaacd910d7d94cc08d6a13a2b276d",
       "executable": false
     },
     {
       "target_name": ".agents/skills/delivery-verification/agents/openai.yaml",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
       "target_sha256": "4f1faac39bc1f986e2738ff09880761c2e61189c26a9639c4bda4369105369ab",
       "executable": false
@@ -563,7 +579,7 @@
     {
       "target_name": ".agents/skills/delivery-verification/scripts/evidence_contract.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
       "target_sha256": "8ba6f98eee71fc287935e546042f4fa2fc3585b20b5d29bb7029a5865967f251",
       "executable": false
@@ -571,7 +587,7 @@
     {
       "target_name": ".playbook/scripts/host_adoption.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "9ea795d4a99f8ab6670818f2faebd676f309a65d5c87dff253482405ce2aed80",
       "target_sha256": "9ea795d4a99f8ab6670818f2faebd676f309a65d5c87dff253482405ce2aed80",
       "executable": false
@@ -579,7 +595,7 @@
     {
       "target_name": ".playbook/docs/project/host-skill-adoption.md",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "dbdaafdfa3b3ca0b373626f2a2bc0229f4568bd601ab221196421f2cb3085ff7",
       "target_sha256": "dbdaafdfa3b3ca0b373626f2a2bc0229f4568bd601ab221196421f2cb3085ff7",
       "executable": false
@@ -587,7 +603,7 @@
     {
       "target_name": ".playbook/skills/btdd/references/role-relay.md",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
       "target_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
       "executable": false
@@ -595,7 +611,7 @@
     {
       "target_name": ".agents/skills/btdd/references/role-relay.md",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
       "target_sha256": "c391c7e0203c34b91aeb00316e6818713ec6ef70be8af387e154f7f06a1e8f6c",
       "executable": false
@@ -603,15 +619,15 @@
     {
       "target_name": ".playbook/docs/project/gitlab-cli-api-runbook.md",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "c403821d1ac76e70fb4220bc56107e6c858278b5780a6182c6c2b60fc6ea7be8",
-      "target_sha256": "c403821d1ac76e70fb4220bc56107e6c858278b5780a6182c6c2b60fc6ea7be8",
+      "action": "noop",
+      "source_sha256": "0143e74e96c352123b74cbc265ff8271267f7bc2d2cb0a86b533aa47fa4faeb5",
+      "target_sha256": "0143e74e96c352123b74cbc265ff8271267f7bc2d2cb0a86b533aa47fa4faeb5",
       "executable": false
     },
     {
       "target_name": ".playbook/docs/project/reviewer-checklists.md",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "8aaee2e51b50deaa699d32df6c155ba30146486356955b9066b8308ce9618b59",
       "target_sha256": "8aaee2e51b50deaa699d32df6c155ba30146486356955b9066b8308ce9618b59",
       "executable": false
@@ -619,7 +635,7 @@
     {
       "target_name": ".playbook/docs/project/reviewer-question-contracts.md",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "152f7f8539b5856cd607e79558fd71d3f72e50a2451c7e65432f8979f3378396",
       "target_sha256": "152f7f8539b5856cd607e79558fd71d3f72e50a2451c7e65432f8979f3378396",
       "executable": false
@@ -627,7 +643,7 @@
     {
       "target_name": ".playbook/scripts/delivery_context.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "8e5c5e06b38bea2e2a3c71ac2a5cc74eed7bcc1f3473de3007da0b8df58b5fac",
       "target_sha256": "8e5c5e06b38bea2e2a3c71ac2a5cc74eed7bcc1f3473de3007da0b8df58b5fac",
       "executable": false
@@ -635,7 +651,7 @@
     {
       "target_name": ".playbook/scripts/lean_core.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "7f8458e4c284f077643f9ff48a47208f7aa94c219e391ff693c2d89dfb30f3e4",
       "target_sha256": "7f8458e4c284f077643f9ff48a47208f7aa94c219e391ff693c2d89dfb30f3e4",
       "executable": false
@@ -643,15 +659,15 @@
     {
       "target_name": ".playbook/scripts/git_workflow_guard.py",
       "strategy": "copy",
-      "action": "copy",
-      "source_sha256": "18aa029d7cf2776ae55a57bdcfbeb026f667ba27f30bcccbea27f437d05b28e8",
-      "target_sha256": "18aa029d7cf2776ae55a57bdcfbeb026f667ba27f30bcccbea27f437d05b28e8",
+      "action": "noop",
+      "source_sha256": "c709ff98705dea907dfc6c24e92f8fd8ead4ce802538400a50ba3704f9411e7f",
+      "target_sha256": "c709ff98705dea907dfc6c24e92f8fd8ead4ce802538400a50ba3704f9411e7f",
       "executable": false
     },
     {
       "target_name": ".playbook/scripts/git_traceability.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "70a1cb800dd49e18a34ae3ba4b7b607e9c0623eaf7bd5482df2c83dd9f049951",
       "target_sha256": "70a1cb800dd49e18a34ae3ba4b7b607e9c0623eaf7bd5482df2c83dd9f049951",
       "executable": false
@@ -659,7 +675,7 @@
     {
       "target_name": "scripts/delivery_context.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
       "target_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
       "executable": true
@@ -667,7 +683,7 @@
     {
       "target_name": "scripts/lean_core.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "312b78c8f7cbcde604fc4058faaa0cce58b39dd8f39eca30c71e0d9b785c04b4",
       "target_sha256": "312b78c8f7cbcde604fc4058faaa0cce58b39dd8f39eca30c71e0d9b785c04b4",
       "executable": false
@@ -675,7 +691,7 @@
     {
       "target_name": "scripts/git_workflow_guard.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
       "target_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
       "executable": true
@@ -683,15 +699,31 @@
     {
       "target_name": "scripts/git_traceability.py",
       "strategy": "copy",
-      "action": "copy",
+      "action": "noop",
       "source_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
       "target_sha256": "531ea3d8a118c2ba61dc4e13d15004f1071352d50b1a4184ede7ad8933d9aae1",
       "executable": true
+    },
+    {
+      "target_name": ".playbook/scripts/github_governance.py",
+      "strategy": "copy",
+      "action": "noop",
+      "source_sha256": "90e757dd317bbced68d867f98da15f68e5a3e4cc9e65c39308c488787a4bdbf6",
+      "target_sha256": "90e757dd317bbced68d867f98da15f68e5a3e4cc9e65c39308c488787a4bdbf6",
+      "executable": false
+    },
+    {
+      "target_name": ".playbook/docs/project/github-governance.md",
+      "strategy": "copy",
+      "action": "noop",
+      "source_sha256": "52c2397602c7a74e83271505ee100334c60a6eff8973045fd22cf5f37d0650e9",
+      "target_sha256": "52c2397602c7a74e83271505ee100334c60a6eff8973045fd22cf5f37d0650e9",
+      "executable": false
     }
   ],
   "local_overrides": [],
   "version_truth": {
-    "source": "annotated Git tag + GitLab Release",
+    "source": "development source commit + dirty/clean state + selected pack-manifest and installed-file hashes",
     "downstream": "Playbook version + selected pack names and hashes in default-branch .seed-lock.json"
   }
 }

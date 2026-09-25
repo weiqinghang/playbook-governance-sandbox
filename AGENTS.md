@@ -3,12 +3,15 @@
 <!-- PLAYBOOK-MANAGED:START -->
 ## Playbook router
 
-GitLab Issue 与 MR 是工作项、唯一当前负责人、流程状态、review 与 release 的事实源；repo 承载业务
+原生平台 Issue 与 MR/PR 是工作项、唯一当前负责人、流程状态、review 与 release 的事实源；repo 承载业务
 代码与已采纳的长期决策。先读取 `AGENTS.md`、`docs/README.md`、
 `.playbook/docs/project/agent-context-protocol.md`、`.playbook/docs/project/document-governance.md`、
 `.playbook/docs/project/charter.md`、`.playbook/docs/project/agent-registry.md` 和
-`.playbook/docs/project/agent-orchestration.md`。不得默认读取或更新 `now.md`；当前阶段由 GitLab
-Issue 与 milestone 表达。
+`.playbook/docs/project/agent-orchestration.md`。不得默认读取或更新 `now.md`；当前阶段由目标平台的 Issue 与 milestone 表达。
+
+按 origin 选择治理入口：GitHub 仓库读取 `.playbook/docs/project/github-governance.md`，
+使用 `gh`、Issue、PR 与 Project；GitLab 仓库读取 `.playbook/docs/project/gitlab-cli-api-runbook.md`，
+使用 `glab`、Issue 与 MR。不得把 GitLab 的远端 API、Board 或 Release 步骤套到 GitHub。
 
 `docs/README.md` 是目标仓可维护的文档导航，不承载 Playbook 版本事实或替代本受管区块的规则；
 `.playbook/docs/project/charter.md` 可补充项目宪章。已安装版本以 `.seed-lock.json` 为准。
@@ -17,22 +20,29 @@ Issue 与 milestone 表达。
 `.playbook/docs/project/host-skill-adoption.md` 做有界只读差异检查；同一会话同一指纹不重复提示。
 全局采用由用户选择，拒绝或主机不明不阻塞项目任务；项目安装不自动写全局配置。
 
-Standard / Heavy single-owner 只需一个 Issue 和一个 MR；不得创建或要求 profile/context/readiness、receipt、
+讨论转为执行、范围变化或合并后开始新工作时，必须重新执行首次写入准入：Standard / Heavy
+先建立/回读 governing Issue（目标、范围、验收、唯一负责人、可执行状态），并先切独立工作分支，
+再修改实现、测试、正式文档或配置；不得在 develop/main/默认或受保护分支先写后补流程。
+使用 `.playbook/scripts/git_workflow_guard.py --action file_mutation --issue <iid>`，规则见
+`.playbook/docs/project/agent-context-protocol.md`。micro_direct 仅可免新增 Issue，不豁免分支；
+只读讨论与仓库外可丢弃实验不需要为此建卡。复用已有授权，不重新询问是否允许实现。
+
+Standard / Heavy single-owner 只需一个 Issue 和一个 MR/PR；不得创建或要求 profile/context/readiness、receipt、
 claim/lease、runtime JSONL、lifecycle manifest 或默认成套 Spec/Plan。高风险动作必须 action-specific
 fail closed，并需明确授权和 fresh readback；merge、tag、Release 与 Issue/milestone closeout 不由普通
 mutation 自动授权。
 
-每次普通 commit 的主题都必须包含当前 governing GitLab Issue IID，采用
+每次普通 commit 的主题都必须包含当前 governing Issue 编号，采用
 `type[(scope)]: summary (#<iid>)`；代码、测试、Spec/Plan 与文档均适用。先从当前 Issue 回读
-IID，再将完整提交信息写入文件，运行 `python3 scripts/git_workflow_guard.py --action commit
+编号，再将完整提交信息写入文件，运行 `python3 scripts/git_workflow_guard.py --action commit
 --issue <iid> --message-file <提交信息文件>`，最后以 `git commit -F <提交信息文件>` 提交。
-push 前运行 `python3 scripts/git_workflow_guard.py --action push --issue <iid>`；MR 的 Issue 链接
+push 前运行 `python3 scripts/git_workflow_guard.py --action push --issue <iid>`；MR/PR 的 Issue 链接
 不能代替 commit 自身的 Issue 引用。`--branch-only` 只供只读诊断。
 
 普通修复、实验和未合并候选只进入 `CHANGELOG.md` 的 `未发布` 区，不得消耗 SemVer 或修改
 `seed/version.json`、release registry、release note、推荐版本和下游升级矩阵。只有用户明确授权
 “准备 vX.Y.Z release”且 exact candidate/review 已就绪时，才可在单独 release change 中推进这些
-metadata；tag、GitLab Release 与下游升级须在明确授权动作集合内，一次明确请求可覆盖多项；逐动作验证不等于逐动作询问。
+metadata；tag、目标平台 Release 与下游升级须在明确授权动作集合内，一次明确请求可覆盖多项；逐动作验证不等于逐动作询问。
 
 `micro_direct` 必须先于 Goal-driven Delivery 和 `product_behavior|product_technical|non_product` 分类判断。
 仅限 CSS、布局、截断、格式或不改变业务含义的纯展示修改；还须单仓、局部、可逆、用户已授权、

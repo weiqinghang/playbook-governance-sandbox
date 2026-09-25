@@ -46,8 +46,8 @@ Micro Direct 仍先按其既有准入条件判定并保持紧凑路径；本门�
 side effects 前执行同一门；Executor 只消费仍有效的 dispatch。普通 single-owner 在自己的第一项实现
 副作用前复用同一规则，不增加 handoff 或第二 owner。
 
-默认只读取完成当前动作所需的最小信息：GitLab Issue description/note 中的 goal、scope、
-acceptance、唯一 assignee 与 `workflow::*`，以及关联 MR 的当前 HEAD、diff、测试和 review。
+默认只读取完成当前动作所需的最小信息：原生平台 Issue description/note 中的 goal、scope、
+acceptance、唯一 assignee 与 `workflow::*`，以及关联 MR/PR 的当前 HEAD、diff、测试和 review。
 先搜索和缩小范围，再读取直接依赖的局部内容；只有依赖不清、测试失败或多次尝试失败时才扩展。
 
 上下文升级顺序为：Issue/MR 摘要 -> 相关结构 -> 局部实现 -> 必要的完整文件。每次升级简短说明
@@ -69,3 +69,27 @@ lease 或 runtime JSONL。Issue/MR 是执行事实，note 是可追溯沟通，�
 连续两轮没有新增证据、缩小不确定性或验收进展时，先诊断并改变方法、上下文或模型投入，再继续。
 次数是干预信号，不是机械第三次换型号、第四次必停。权限和目标问题先修边界，模型不能替代授权。
 Reviewer pending 与观察窗口结束不等于 timeout/blocked；继续等待同一实例，使用现有 Reviewer Wait Policy。
+
+## 讨论转执行：首次持久化修改前
+
+本检查在每次 discussion/decision 转 execution、任务范围实质变化，以及合并后开始下一项工作时触发，
+不只在会话开头或 commit/push 时触发。用户授权做事后直接完成准入，不重复索要实现许可。
+
+1. 先读取当前 remote、默认/受保护分支、当前 branch 与工作区改动；先建独立工作分支，
+   再写入实现、测试、正式规范或配置。不得先在 develop/main/default 上编辑，等提交时再补分支。
+2. Standard / Heavy 在首次持久化实现修改前，建立或复用同仓 governing Issue，回读非空目标、范围、
+   验收、唯一 assignee、唯一可执行 workflow 与 backlog::ready-for-dev。聊天授权是建立这些事实的
+   依据，不能替代它们；non_product 文档/治理修改也不自动豁免此边界。
+3. 执行 `python3 .playbook/scripts/git_workflow_guard.py --action file_mutation --issue <iid>`；
+   commit/push 使用对应 action 再检查。命令 fresh-read 原生平台事实；无权限或读取失败不得猜测通过。
+   `--branch-only` 仅诊断，`--allow-protected` 不是首次写入准入豁免。
+4. 已满足全部 micro_direct 条件时可免新增 Issue，但仍须工作分支。使用 `--route micro_direct
+   --micro-evidence <临时JSON>` 声明所有准入条件；它是当前检查输入，不保存 receipt 或新生命周期。
+   仓库已有必须 Issue/MR 的规则仍优先；不能仅凭 sizing::micro 进入此路径。
+5. 只读讨论、搜索，以及仓库外隔离且可丢弃的实验不强制新建 Issue。已在错误分支出现改动时，
+   保留并辨认归属，安全迁入工作分支后再继续，不自动 reset/stash 或夹带他人改动。
+
+这是 Agent 必须调用的准入检查，不是宿主文件系统拦截器；普通 Git hook 或 CI 不能阻止首次本地编辑。
+未集成宿主写入拦截时，不宣称可以阻止任意绕过脚本的写入。
+
+GitHub 个人仓库使用 `.playbook/docs/project/github-governance.md` 的 labels 权威兼容入口；GitLab 使用其 CLI/API runbook。平台接口按 origin 识别，不能把 GitLab endpoint 套到 GitHub。

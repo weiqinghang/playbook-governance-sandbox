@@ -132,7 +132,7 @@ receipt；最终仍接受 exact-HEAD 独立 Reviewer。
 不得计入 dogfood，也不得把未询问或未记录解释为产品已拒绝。
 `standard_product_return` 不要求 `acceptance_authorization`，不得因 AC 分类缺失返回 Discovery；
 `opt_in_dogfood` 则必须在
-进入 `workflow::ready` 前完成以下交接字段及既有 AC 闭集约束。选择动作只使用当前 GitLab Issue/note，
+进入 `workflow::ready` 前完成以下交接字段及既有 AC 闭集约束。选择动作只使用当前 governing Issue/note，
 不创建 receipt 或第二状态机。
 
 跨仓交付时，governing Issue 是 continuity 决定的唯一事实源。发送给每个实现仓 Session/MR 的轻量输入
