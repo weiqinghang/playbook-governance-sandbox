@@ -122,7 +122,7 @@ python3 .playbook/skills/delivery-verification/scripts/evidence_contract.py aggr
 
 - 不替代 QA 的探索性判断。
 - 不替代独立 Formal Reviewer 的 scope、设计和风险判断。
-- 不替代 final-HEAD confirmation、GitLab close scope 或 merge gate。
+- 不替代 final-HEAD confirmation、目标平台 close scope 或 merge gate。
 - 不为了填满矩阵制造无价值命令；每条 evidence 必须支撑一个 acceptance item。
-- 不自动 merge、deploy、查日志或执行 UAT；各层分别从 GitLab/pipeline、部署系统、health、ELK/logs
+- 不自动 merge、deploy、查日志或执行 UAT；各层分别从 目标平台/pipeline、部署系统、health、ELK/logs
   和业务验收对象 fresh-read。
