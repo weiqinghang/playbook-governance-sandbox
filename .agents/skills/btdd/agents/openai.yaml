@@ -1,0 +1,4 @@
+interface:
+  display_name: "BDD-led TDD+"
+  short_description: "Deliver product behavior with executable BDD and batch TDD"
+  default_prompt: "Use $btdd to deliver this approved product behavior with simple design, executable RED evidence, and a coherent GREEN batch."

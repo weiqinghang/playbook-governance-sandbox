@@ -1,0 +1,159 @@
+{
+  "schema_version": 2,
+  "contract_ref": "subagent-model-routing/v2",
+  "authority": "playbook",
+  "purpose": "Offer optional task-sensitive subagent preferences while deciding model capability and reasoning effort independently. Preserve user root and personal configuration, then validate actual host availability before dispatch.",
+  "resolution_statuses": ["available", "degraded", "unavailable"],
+  "root_model_policy": "unmanaged",
+  "personal_config_policy": {
+    "owner": "user",
+    "path_example": "~/.codex/model-routing.json",
+    "seed_action": "do_not_overwrite",
+    "sync_advice": "Review personal starting preferences manually after installing a changed Playbook policy. Project seed and upgrades never rewrite them."
+  },
+  "host_effort_contract": {
+    "values": ["low", "medium", "high", "xhigh", "max", "ultra"],
+    "ui_aliases": {"Light": "low"},
+    "unknown_or_unavailable": "unavailable",
+    "validation": "Use only values reported for the selected model by the current host. A UI label is normalized before dispatch and is not an additional host effort value."
+  },
+  "profiles": {
+    "FAST": {
+      "current_model": "gpt-5.6-luna",
+      "display_name": "Luna",
+      "preferred_efforts": ["low", "medium"],
+      "activation": "explicit_low_risk_evaluation_only"
+    },
+    "BALANCED": {
+      "current_model": "gpt-5.6-terra",
+      "display_name": "Terra",
+      "preferred_efforts": ["medium", "high"]
+    },
+    "FRONTIER": {
+      "current_model": "gpt-6-astra",
+      "display_name": "Astra",
+      "preferred_efforts": ["low", "medium"],
+      "optional_alternatives": [
+        {
+          "model": "gpt-5.6-sol",
+          "purpose": "measured_cost_latency_or_availability_alternative",
+          "mandatory_step": false,
+          "rank_claim": "none"
+        }
+      ]
+    }
+  },
+  "task_classes": {
+    "deterministic_check": {"profile": "BALANCED", "effort": "medium", "fallback_profiles": []},
+    "ordinary_implementation": {"profile": "BALANCED", "effort": "medium", "fallback_profiles": []},
+    "formal_reviewer": {"profile": "BALANCED", "effort": "high", "fallback_profiles": []},
+    "multi_hypothesis_review": {"profile": "BALANCED", "effort": "high", "fallback_profiles": []},
+    "ambiguous_architecture": {"profile": "FRONTIER", "effort": "medium", "fallback_profiles": []},
+    "cross_system_root_cause": {"profile": "FRONTIER", "effort": "medium", "fallback_profiles": []},
+    "high_risk_design": {"profile": "FRONTIER", "effort": "medium", "fallback_profiles": []}
+  },
+  "supervisor_executor_roles": {
+    "supervisor": {
+      "primary": [
+        {"model": "gpt-6-sol", "effort": "medium"},
+        {"model": "gpt-6-sol", "effort": "high"},
+        {"model": "gpt-6-sol", "effort": "xhigh"},
+        {"model": "gpt-6-sol", "effort": "max"}
+      ],
+      "availability_fallback": [
+        {"model": "gpt-5.6-sol", "effort": "medium"},
+        {"model": "gpt-5.6-sol", "effort": "high"}
+      ]
+    },
+    "executor": {
+      "primary": [
+        {"model": "gpt-6-luna", "effort": "high"},
+        {"model": "gpt-6-luna", "effort": "xhigh"},
+        {"model": "gpt-6-luna", "effort": "max"}
+      ],
+      "after_primary_max": [
+        {"model": "gpt-6-sol", "effort": "high"},
+        {"model": "gpt-6-sol", "effort": "xhigh"},
+        {"model": "gpt-6-sol", "effort": "max"}
+      ],
+      "availability_fallback": [
+        {"model": "gpt-5.6-terra", "effort": "medium"},
+        {"model": "gpt-5.6-terra", "effort": "high"}
+      ]
+    }
+  },
+  "supervisor_executor_local_override": {
+    "path": "$CODEX_HOME/model-routing.json",
+    "field": "supervisor_executor_roles",
+    "legacy_schema_2_candidates": {
+      "supervisor": "starting_preferences.supervision",
+      "executor": "starting_preferences.ordinary_implementation"
+    },
+    "conflict_action": "Pause affected dispatch and ask once whether the user's route applies only to this task or to future Playbook tasks. A legacy generic preference is only a candidate, never an already confirmed persistent role route.",
+    "pending_result_policy": "A needs_confirmation result exposes the candidate and confirmation binding, but no dispatchable route. Only a same-role, same-task_ref status=ready resolution issued by resolve_role contains route and a process-local dispatch capability; callers must not construct a ready result from a pending candidate or repository default.",
+    "confirmation_binding": "A this_task or future choice must record scope, role, task_ref, SHA-256 digest of the exact candidate route and a locatable user-choice evidence_ref. This-task confirmation expires when the task, role or candidate changes; a task choice equal to the repository default still needs confirmation if it bypasses a conflicting local route. Future confirmation writes only the exact chosen route into the user-managed file.",
+    "persistent_write_scope": "Only the user-managed local file may be changed after a future-scope choice; never edit this distributed repository config for a personal choice."
+  },
+  "supervisor_executor_task_adequacy": {
+    "assessment_fields": ["task_ref", "model", "effort", "status", "evidence_ref"],
+    "statuses": ["adequate", "insufficient"],
+    "selection_input": "select_step verifies the resolver-issued process-local HMAC capability binding confirmation scope, role, task_ref, source and route digest, then checks current-task and exact-step adequacy. Pending, caller-crafted ready dictionaries, cross-task ready, mutated ready routes, or raw route dictionaries fail closed. Re-run resolve_role after a process restart or resumed task using the current local config and applicable user confirmation; the capability only guards in-process handoff and does not prove user consent or host dispatch.",
+    "selection_rule": "Use a fresh assessment tied to the current task_ref and each exact model/effort. Skip a proven insufficient available step; an unknown earlier available step blocks dispatch. Select only an available step with adequate evidence for the current task.",
+    "escalation_rule": "Escalation needs model_insufficient diagnosis and an insufficient assessment for the exact current model/effort; an unbound free-text adequacy statement is not evidence for another step.",
+    "supervisor_fallback_gate": "Use 5.6 Sol only when no 6 Sol model/effort is both host-available and assessed adequate; unknown available 6 Sol adequacy blocks fallback.",
+    "executor_fallback_gate": "Use 5.6 Terra only when every 6 Luna primary model/effort is host-unavailable. Proven Luna insufficiency alone does not open Terra; the Luna Max to 6 Sol path still requires an actual Max insufficiency diagnosis."
+  },
+  "supervisor_executor_resolution_precedence": [
+    "confirmed_explicit_task_choice",
+    "confirmed_user_local_role_route",
+    "repository_role_default"
+  ],
+  "supervisor_executor_v2_scope": {
+    "applies_only_to": ["supervisor", "executor"],
+    "other_role_policy": "The v2 generic profiles, task classes, transition policy and Reviewer route remain unchanged.",
+    "generic_substitution_exception": "The user-approved Supervisor/Executor route is a scoped exception to the generic no-fixed-ladder, Luna opt-in and Sol-optional preferences; it does not change those preferences for other roles.",
+    "ordered_route_is_preference": "The user-approved role route is an ordered preference, not automatic escalation. Every effort/model increase needs diagnosed model insufficiency and an evidence reference.",
+    "diagnosis": "Fix environment, permission, goal and method problems at their source before considering a model or effort increase.",
+    "initial_executor_high_exception": "The user-approved Executor starting effort is high for this role; this scoped exception supersedes the generic elevated_effort_policy starting point.",
+    "cross_model_initial_effort_exception": "The user-approved Executor Luna-to-Sol route begins at Sol high only after evidenced Luna max insufficiency; this scoped exception supersedes the generic cross_model_upgrade initial low effort. When no 6 Luna combination is available, use the listed 5.6 Terra fallback only with fresh exact-step adequacy evidence.",
+    "availability_and_readback": "Require fresh host model/effort availability, task adequacy and actual dispatched model/effort readback before side effects."
+  },
+  "transition_policy": {
+    "same_model_effort_increase": {
+      "model_must_remain_unchanged": true,
+      "requires_new_evidence": true,
+      "evidence_ref_required": true
+    },
+    "cross_model_upgrade": {
+      "initial_effort": "low",
+      "inherit_previous_effort": false,
+      "applies_to_roles": ["delivery_owner", "supervisor", "executor", "reviewer"],
+      "post_upgrade_effort_increase": {
+        "requires_new_evidence": true,
+        "evidence_ref_required": true,
+        "reason": "The stronger model at its initial effort did not satisfy a named acceptance or reduce the diagnosed uncertainty."
+      }
+    },
+    "explicit_override": {
+      "preserve_when_host_available": true,
+      "must_not_rewrite_root_configuration": true
+    }
+  },
+  "intervention_policy": {
+    "trigger": "two_iterations_without_useful_new_evidence_or_narrowing",
+    "order": [
+      "diagnose_method_context_environment",
+      "change_method_or_context",
+      "change_model_or_effort_with_evidence"
+    ],
+    "automatic_model_upgrade": false,
+    "automatic_effort_increase": false
+  },
+  "effort_exception_reasons": ["irreversible_risk", "prior_failure", "post_upgrade_acceptance_gap"],
+  "elevated_effort_policy": "High and above require a concrete unresolved risk, failure, or post-upgrade acceptance-gap evidence reference. A broad complexity label alone is insufficient.",
+  "future_model_replacement": "Update optional profile preferences after host availability and task-adequacy evidence. preferred_efforts are preferences, not a claim about all supported host efforts.",
+  "resolution_precedence": ["explicit_task_override", "host_configuration", "profile_default"],
+  "availability_evidence": "Read the actual host model and supported effort before dispatch; defaults are suggestions, never an allowlist.",
+  "cost_preference": "Use the lowest total cost expected to meet acceptance, including setup, non-cached input, rework and missed risk. This preference never blocks a capable configured root from performing a check.",
+  "substitution_policy": "No automatic downgrade or fixed model ladder. An unavailable preferred model requires fresh host model/effort readback and task-adequacy evidence for the replacement; otherwise pause only dependent dispatch. FAST/Luna is opt-in evaluation, and Sol is an optional measured alternative rather than a mandatory step."
+}
