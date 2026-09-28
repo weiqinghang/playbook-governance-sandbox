@@ -38,7 +38,11 @@ class GitHub:
         if out.returncode:
             # Do not reflect arbitrary API bodies or credentials to logs.
             raise PolicyError(f'GitHub {method} {endpoint.split("?")[0]} failed')
-        return json.loads(out.stdout) if out.stdout.strip() else None
+        if not out.stdout.strip(): return None
+        try:
+            return json.loads(out.stdout)
+        except json.JSONDecodeError as error:
+            raise PolicyError(f'GitHub {method} {endpoint.split("?")[0]} returned invalid JSON') from error
 
     def graphql(self, query, **variables):
         result = self.api('graphql', 'POST', {'query': query, 'variables': variables})
@@ -245,7 +249,7 @@ def sync_issue(client, number, project, apply):
     return {'issue': number, 'item': item, 'projection': values, 'verified': True}
 
 
-def transition(client, number, workflow, maturity, apply):
+def transition(client, number, workflow, maturity, apply, project=None):
     endpoint = client.base + f'/issues/{number}'
     issue = client.api(endpoint)
     if 'pull_request' in issue or issue.get('state') != 'open': raise PolicyError('open Issue required')
@@ -265,7 +269,16 @@ def transition(client, number, workflow, maturity, apply):
         read = client.api(endpoint)
         if set(label_names(read)) != set(labels) or read['state'] != issue['state']:
             raise PolicyError('transition readback failed')
-    return {'issue': number, 'labels': labels, 'applied': apply}
+    result = {'issue': number, 'labels': labels, 'applied': apply}
+    if apply and project is not None:
+        try:
+            result['project_projection'] = sync_issue(client, number, project, True)
+        except (PolicyError, KeyError, TypeError, OSError, json.JSONDecodeError) as error:
+            raise PolicyError(
+                f'Issue labels changed; Project projection was not verified. '
+                f'Retry sync --issue {number} --project {project["number"]}: {error}'
+            ) from error
+    return result
 
 
 def milestone(client, title, apply):
@@ -383,6 +396,7 @@ def main():
     sync = sub.add_parser('sync'); sync.add_argument('--issue', type=int, required=True); sync.add_argument('--project', type=int, required=True)
     move = sub.add_parser('transition'); move.add_argument('--issue', type=int, required=True)
     move.add_argument('--workflow', choices=WORKFLOW, required=True); move.add_argument('--maturity', choices=MATURITY, required=True)
+    move.add_argument('--project', type=int, help='sync and verify this Project after applying the label transition')
     mile = sub.add_parser('milestone'); mile.add_argument('--title', required=True)
     merge = sub.add_parser('merge-preflight'); merge.add_argument('--pr', type=int, required=True); merge.add_argument('--issue', type=int, required=True)
     protect = sub.add_parser('protect-default'); protect.add_argument('--check', required=True)
@@ -395,12 +409,14 @@ def main():
         if args.command == 'init':
             result = {'labels_created_or_planned': ensure_labels(client, args.apply), 'project': ensure_project(client, args.apply, args.recover_project)}
         elif args.command == 'sync': result = sync_issue(client, args.issue, project_by_number(client, args.project), args.apply)
-        elif args.command == 'transition': result = transition(client, args.issue, args.workflow, args.maturity, args.apply)
+        elif args.command == 'transition':
+            project = project_by_number(client, args.project) if args.project is not None else None
+            result = transition(client, args.issue, args.workflow, args.maturity, args.apply, project)
         elif args.command == 'milestone': result = milestone(client, args.title, args.apply)
         elif args.command == 'protect-default': result = protect_default(client, args.check, args.apply)
         else: result = merge_preflight(client, args.pr, args.issue)
         print(json.dumps(result, ensure_ascii=False, indent=2)); return 0
-    except (PolicyError, KeyError, TypeError, OSError, StopIteration) as error:
+    except (PolicyError, KeyError, TypeError, OSError, StopIteration, json.JSONDecodeError) as error:
         print(json.dumps({'decision': 'deny', 'reason': str(error)}, ensure_ascii=False)); return 2
 
 if __name__ == '__main__': raise SystemExit(main())
