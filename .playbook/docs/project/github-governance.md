@@ -1,8 +1,11 @@
 # GitHub.com 个人仓库治理兼容方案
 
 首版面向个人 Free 公开单仓。使用 `gh` 的已登录账号，写入前确认目标 owner/repo；私有仓库
-及企业版能力不从公开沙箱推断。现有 `gitlab-governance-core` pack 名称保留兼容，并提供 GitHub
-适配脚本；不要求 GitHub 目标调用 glab。托管 Web 安装服务目前仍为 GitLab，不在此冒称支持 GitHub OAuth。
+及企业版能力不从公开沙箱推断。`git-repository-governance-core` 同时提供 GitHub 与 GitLab 治理入口；旧
+`gitlab-governance-core` Pack ID 只作为安装器兼容输入，并在下一次安装锁写为新 ID。GitHub 目标
+执行仓库治理时使用 `gh`，不调用 `glab`。托管 Web 安装服务按仓库 URL 支持 GitHub 与 GitLab：
+GitHub 仓库连接使用该仓库授权的 fine-grained PAT，Hosted 用户登录仍使用 User Center OAuth；
+安装服务不以 GitHub OAuth 获取仓库权限。
 
 ## 权威与入口
 
@@ -20,8 +23,8 @@ origin、平台默认/受保护分支与同仓 Issue；目标仓必须先存在�
 python3 .playbook/scripts/github_governance.py --repo OWNER/REPO init
 python3 .playbook/scripts/github_governance.py --repo OWNER/REPO --apply init
 python3 .playbook/scripts/github_governance.py --repo OWNER/REPO --apply milestone --title 'Iteration 1'
-python3 .playbook/scripts/github_governance.py --repo OWNER/REPO --apply transition --issue 1 --workflow doing --maturity ready-for-dev
-python3 .playbook/scripts/github_governance.py --repo OWNER/REPO --apply sync --issue 1 --project 1
+python3 .playbook/scripts/github_governance.py --repo OWNER/REPO --apply transition --issue 1 --workflow doing --maturity ready-for-dev --project 1
+python3 .playbook/scripts/github_governance.py --repo OWNER/REPO --apply sync --issue 1 --project 1  # 修复投影时使用
 ```
 
 所有写命令都要求 `--apply`；缺省为读取/预览。Project 使用与仓库绑定的描述标记；同名但未标记的
@@ -31,7 +34,9 @@ python3 .playbook/scripts/github_governance.py --repo OWNER/REPO --apply sync --
 默认字段与默认 View 1 的空项目，任何定制都拒绝；不凭同名自动认领。
 Board 使用普通 Project 单选字段作为可丢弃投影，字段不保存治理权威；手工拖动不能触发
 Issue 状态、merge、Release 或 close。下次 sync 按原生 Issue labels 恢复字段。
-标签变更后应立即 sync；可由可信定时/事件调用方调度同一命令。首版不安装后台服务或双向机器人，
+阶段迁移应带 `--project <number>`，同一命令在更新标签后同步并回读投影；若同步失败，标签仍是
+事实源，命令会明确报告部分完成，执行者须重试 `sync` 并回读。直接从 GitHub UI 改标签或关闭 Issue
+后也应立即 sync；可由可信定时/事件调用方调度同一命令。首版不安装后台服务或双向机器人，
 未调度时应明确展示只是最近一次同步结果，不宣称实时。不要把个人管理 token 写入公开仓库或日志。
 
 ## 分支保护
